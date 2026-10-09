@@ -1,0 +1,223 @@
+/* GLOBAL RESET */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        /* BACKGROUND TEMA MALAM (Biru Ungu) */
+        body {
+            background: linear-gradient(135deg, #02040a 0%, #08122b 40%, #12193b 70%, #1f143a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ANIMASI BINTANG */
+        .stars {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3;
+            background-image: 
+                radial-gradient(1px 1px at 10% 20%, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 30% 40%, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.8), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 70% 60%, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 80% 30%, rgba(255,255,255,0.6), rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 90% 80%, #ffffff, rgba(0,0,0,0));
+            background-repeat: repeat; background-size: 250px 250px;
+            animation: twinkle 5s infinite alternate ease-in-out; opacity: 0.9;
+        }
+        @keyframes twinkle { 0% { opacity: 0.5; } 100% { opacity: 1; } }
+
+        /* ANIMASI METEOR */
+        .meteor-shower {
+            position: fixed; top: -50%; left: -50%; width: 200vw; height: 200vh;
+            z-index: -2; pointer-events: none; transform: rotate(-45deg);
+        }
+        .comet {
+            position: absolute; left: 100%; width: 3px; height: 3px;
+            background: #ffffff; border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8), 0 0 20px 4px rgba(100, 200, 255, 0.4);
+            animation: fall linear infinite; opacity: 0;
+        }
+        .comet::before {
+            content: ''; position: absolute; top: 50%; right: 100%; transform: translateY(-50%);
+            width: 120px; height: 1px;
+            background: linear-gradient(to left, rgba(255,255,255,1) 0%, rgba(100,200,255,0.3) 50%, transparent 100%);
+        }
+        @keyframes fall { 0% { transform: translateX(0); opacity: 1; } 10% { transform: translateX(-100vw); opacity: 0; } 100% { transform: translateX(-100vw); opacity: 0; } }
+        .comet:nth-child(1) { top: 30%; animation-duration: 6s; animation-delay: 1s; }
+        .comet:nth-child(2) { top: 45%; animation-duration: 8s; animation-delay: 4s; }
+        .comet:nth-child(3) { top: 60%; animation-duration: 5s; animation-delay: 7s; }
+
+        /* CONTAINER UTAMA */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* NAVIGATION BAR */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .logo { font-size: 1.5em; font-weight: 900; letter-spacing: 2px; }
+        nav ul { list-style: none; display: flex; gap: 20px; }
+        nav a {
+            color: #d9e6ff; text-decoration: none; font-weight: 600;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: #6699ff; }
+
+        /* HERO SECTION */
+        header.hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 0;
+            gap: 40px;
+            flex-wrap: wrap; 
+        }
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        .hero-text h1 {
+            font-size: 4em;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+        .hero-text h1 span {
+            color: #6699ff; 
+        }
+        .hero-text p {
+            font-size: 1.2em;
+            color: #a3c2ff;
+            margin-bottom: 30px;
+            max-width: 80%;
+        }
+        
+        /* GAMBAR HERO */
+        figure.hero-image {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        figure.hero-image img {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            background: linear-gradient(135deg, rgba(102, 153, 255, 0.4), rgba(43, 31, 71, 0.8));
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 4px solid rgba(255,255,255,0.1);
+            transition: border-radius 0.5s ease;
+        }
+        figure.hero-image img:hover {
+            border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+        }
+        figcaption {
+            margin-top: 15px; font-size: 0.9em; color: #8fa8d6; font-style: italic;
+        }
+
+        /* SECTION GLOBAL STYLE */
+        section { padding: 60px 0; }
+        .section-title {
+            font-size: 2.5em; margin-bottom: 40px; font-weight: 800;
+        }
+
+        /* GRID LAYOUT */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: rgba(15, 25, 50, 0.45);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(102, 153, 255, 0.15);
+            border-color: rgba(102, 153, 255, 0.5);
+        }
+        .card h3 { font-size: 1.4em; margin-bottom: 10px; color: #ffffff; }
+        .card p { color: #d9e6ff; font-size: 0.95em; }
+
+        /* ASIDE TAMPILAN BERBEDA */
+        aside {
+            background: linear-gradient(135deg, rgba(102, 153, 255, 0.2), rgba(0,0,0,0.5));
+            padding: 40px; border-radius: 20px; text-align: center;
+            border: 1px dashed rgba(255,255,255,0.3); margin: 40px 0;
+        }
+
+        /* FORM KONTAK & INFO KONTAK */
+        .contact-wrapper {
+            display: flex; gap: 40px; flex-wrap: wrap;
+        }
+        .contact-info { flex: 1; min-width: 300px; }
+        
+        .contact-links {
+            margin-top: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .contact-links a {
+            display: inline-block;
+            background: rgba(102, 153, 255, 0.15);
+            color: #d9e6ff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 12px 25px;
+            border-radius: 30px;
+            border: 1px solid rgba(102, 153, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .contact-links a:hover {
+            background: #6699ff;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 153, 255, 0.4);
+        }
+
+        form { flex: 1; min-width: 300px; background: rgba(0,0,0,0.3); padding: 30px; border-radius: 20px; }
+        
+        form div { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #cce0ff; font-size: 0.95em; }
+        input {
+            width: 100%; padding: 15px; border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05); color: white;
+        }
+        input:focus { outline: none; border-color: #6699ff; background: rgba(0, 0, 0, 0.6); }
+        
+        button {
+            background-color: #3366cc; color: white; padding: 15px 30px;
+            border: none; border-radius: 30px; cursor: pointer; font-size: 1.1em; font-weight: bold;
+            transition: all 0.3s ease; width: 100%;
+        }
+        button:hover { background-color: #6699ff; box-shadow: 0 0 20px rgba(102, 153, 255, 0.6); }
+
+        footer { text-align: center; padding: 30px 0; color: #8fa8d6; border-top: 1px solid rgba(255,255,255,0.1); }
+
+/* Styles originally written inline, moved here to keep CSS external */
+.inline-style-1 { display:inline-block; background:#fff; color:#050914; padding:12px 30px; border-radius:30px; text-decoration:none; font-weight:bold; }
+.inline-style-2 { background: rgba(102, 153, 255, 0.2); border-color: #6699ff; }
+.inline-style-3 { margin-bottom: 20px; color: #a3c2ff; }
+.inline-style-4 { margin-top: 15px; color: #a3c2ff; }
